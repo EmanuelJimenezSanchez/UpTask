@@ -3,6 +3,7 @@
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Resend;
 
 class Email
 {
@@ -36,7 +37,7 @@ class Email
 
     $contenido = "<html>";
     $contenido .= "<p><strong>Hola " . $this->nombre . "</strong>, has creado tu cuenta en UpTask, solo debes confirmarla en el siguiente enlace</p>";
-    $contenido .= "<p>Presiona aqui: <a href='http://localhost:3000/confirmar?token=" . $this->token . "'>Confirmar Cuenta</a></p>";
+    $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/confirmar?token=" . $this->token . "'>Confirmar Cuenta</a></p>";
     $contenido .= "<p>Si no has sido tu, ignora este mensaje</p>";
     $contenido .= "</html>";
 
@@ -44,6 +45,15 @@ class Email
 
     // Enviar el email
     $mail->send();
+
+    $resend = Resend::client($_ENV['EMAIL_KEY']);
+
+    $resend->emails->send([
+      'from' => 'Acme <onboarding@resend.dev>',
+      'to' => ['delivered@resend.dev'],
+      'subject' => 'hello world',
+      'html' => '<strong>it works!</strong>',
+    ]);
   }
 
   public function enviarReestablecer()
