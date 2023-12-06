@@ -3,7 +3,6 @@
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
-// use Resend;
 
 class Email
 {
@@ -33,7 +32,7 @@ class Email
     $mail->Subject = 'Confirma tu cuenta';
 
     $mail->isHTML(true);
-    // $mail->CharSet = 'UTF-8';
+    $mail->CharSet = 'UTF-8';
 
     $contenido = "<html>";
     $contenido .= "<p><strong>Hola " . $this->nombre . "</strong>, has creado tu cuenta en UpTask, solo debes confirmarla en el siguiente enlace</p>";
@@ -45,15 +44,6 @@ class Email
 
     // Enviar el email
     $mail->send();
-
-    // $resend = Resend::client($_ENV['EMAIL_KEY']);
-
-    // $resend->emails->send([
-    //   'from' => 'cuentas@uptask.com',
-    //   'to' => $this->email,
-    //   'subject' => 'Confirma tu cuenta',
-    //   'html' => $contenido,
-    // ]);
   }
 
   public function enviarReestablecer()
