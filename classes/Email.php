@@ -49,10 +49,10 @@ class Email
     $resend = Resend::client($_ENV['EMAIL_KEY']);
 
     $resend->emails->send([
-      'from' => 'Acme <onboarding@resend.dev>',
-      'to' => ['delivered@resend.dev'],
-      'subject' => 'hello world',
-      'html' => '<strong>it works!</strong>',
+      'from' => 'cuentas@uptask.com',
+      'to' => [$this->email],
+      'subject' => 'Confirma tu cuenta',
+      'html' => $contenido,
     ]);
   }
 
