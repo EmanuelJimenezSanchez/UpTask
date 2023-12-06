@@ -65,7 +65,7 @@ class Email
 
     $contenido = "<html>";
     $contenido .= "<p><strong>Hola " . $this->nombre . "</strong>, has solicitado reestablecer tu contraseña en UpTask, solo debes confirmarla en el siguiente enlace</p>";
-    $contenido .= "<p>Presiona aqui: <a href='http://localhost:3000/reestablecer?token=" . $this->token . "'>Reestablecer Contraseña</a></p>";
+    $contenido .= "<p>Presiona aqui: <a href='" . $_ENV['APP_URL'] . "/reestablecer?token=" . $this->token . "'>Reestablecer Contraseña</a></p>";
     $contenido .= "<p>Si no has sido tu, ignora este mensaje</p>";
     $contenido .= "</html>";
 
