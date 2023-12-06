@@ -3,6 +3,7 @@
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
+use Resend;
 
 class Email
 {
@@ -19,20 +20,20 @@ class Email
 
   public function enviarConfirmacion()
   {
-    $mail = new PHPMailer();
-    $mail->isSMTP();
-    $mail->Host = 'sandbox.smtp.mailtrap.io';
-    $mail->SMTPAuth = true;
-    $mail->Port = 2525;
-    $mail->Username = '4da4b78eaee94d';
-    $mail->Password = '271cac2ec01b67';
+    // $mail = new PHPMailer();
+    // $mail->isSMTP();
+    // $mail->Host = 'sandbox.smtp.mailtrap.io';
+    // $mail->SMTPAuth = true;
+    // $mail->Port = 2525;
+    // $mail->Username = '4da4b78eaee94d';
+    // $mail->Password = '271cac2ec01b67';
 
-    $mail->setFrom('cuentas@uptask.com');
-    $mail->addAddress('cuentas@uptask.com', 'Uptask.com');
-    $mail->Subject = 'Confirma tu cuenta';
+    // $mail->setFrom('cuentas@uptask.com');
+    // $mail->addAddress('cuentas@uptask.com', 'Uptask.com');
+    // $mail->Subject = 'Confirma tu cuenta';
 
-    $mail->isHTML(true);
-    $mail->CharSet = 'UTF-8';
+    // $mail->isHTML(true);
+    // $mail->CharSet = 'UTF-8';
 
     $contenido = "<html>";
     $contenido .= "<p><strong>Hola " . $this->nombre . "</strong>, has creado tu cuenta en UpTask, solo debes confirmarla en el siguiente enlace</p>";
@@ -40,10 +41,19 @@ class Email
     $contenido .= "<p>Si no has sido tu, ignora este mensaje</p>";
     $contenido .= "</html>";
 
-    $mail->Body = $contenido;
+    // $mail->Body = $contenido;
 
-    // Enviar el email
-    $mail->send();
+    // // Enviar el email
+    // $mail->send();
+
+    $resend = Resend::client($_ENV['EMAIL_KEY']);
+
+    $resend->emails->send([
+      'from' => 'cuentas@uptask.com',
+      'to' => $this->email,
+      'subject' => 'Confirma tu cuenta',
+      'html' => $contenido,
+    ]);
   }
 
   public function enviarReestablecer()
