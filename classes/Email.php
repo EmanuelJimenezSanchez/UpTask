@@ -3,7 +3,7 @@
 namespace Classes;
 
 use PHPMailer\PHPMailer\PHPMailer;
-use Resend;
+// use Resend;
 
 class Email
 {
