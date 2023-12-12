@@ -44,16 +44,16 @@ class Email
     $mail->Body = $contenido;
 
     // Enviar el email
-    $mail->send();
+    // $mail->send();
 
-    $resend = Resend::client($_ENV['EMAIL_KEY']);
+    // $resend = Resend::client($_ENV['EMAIL_KEY']);
 
-    $resend->emails->send([
-      'from' => 'cuentas@uptask.com',
-      'to' => [$this->email],
-      'subject' => 'Confirma tu cuenta',
-      'html' => $contenido,
-    ]);
+    // $resend->emails->send([
+    //   'from' => 'cuentas@uptask.com',
+    //   'to' => [$this->email],
+    //   'subject' => 'Confirma tu cuenta',
+    //   'html' => $contenido,
+    // ]);
   }
 
   public function enviarReestablecer()
