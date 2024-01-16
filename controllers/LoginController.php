@@ -10,6 +10,15 @@ class LoginController
 {
   public static function login(Router $router)
   {
+    // Version para portafolio sin login para ingresar con un usuario default
+    $usuario = Usuario::where('id', 8);
+    session_start();
+    $_SESSION['id'] = $usuario->id;
+    $_SESSION['nombre'] = $usuario->nombre;
+    $_SESSION['email'] = $usuario->email;
+    $_SESSION['login'] = TRUE;
+    header('Location: /dashboard');
+
     $alertas = [];
 
     if ($_SERVER['REQUEST_METHOD'] === 'POST') {
